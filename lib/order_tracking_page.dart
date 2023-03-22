@@ -68,6 +68,7 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
             polylineId: PolylineId("route"),
             points: polylineCoordinates,
             color: kPrimaryColor,
+            width: 6,
           ),
         },
         markers: {
