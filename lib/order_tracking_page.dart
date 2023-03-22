@@ -28,16 +28,16 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
         ),
       ),
       body: GoogleMap(
-        initialCameraPosition: CameraPosition(
+        initialCameraPosition: const CameraPosition(
           target: sourceLocation,
           zoom: 13.5,
         ),
         markers: {
-          Marker(
+          const Marker(
             markerId: MarkerId("source"),
             position: sourceLocation,
           ),
-          Marker(
+          const Marker(
             markerId: MarkerId("destination"),
             position: destination,
           ),
