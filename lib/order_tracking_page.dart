@@ -27,8 +27,11 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
           ),
         ),
       ),
-      body: const Center(
-        child: Text("The Flutter Way!"),
+      body: GoogleMap(
+        initialCameraPosition: CameraPosition(
+          target: sourceLocation,
+          zoom: 14.5,
+        ),
       ),
     );
   }
