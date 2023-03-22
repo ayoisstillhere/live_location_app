@@ -14,7 +14,7 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
   final Completer<GoogleMapController> _controller = Completer();
 
   static const LatLng sourceLocation = LatLng(37.33500926, -122.03272188);
-  static const LatLng destination = LatLng(33.33429383, -122.06600055);
+  static const LatLng destination = LatLng(37.33429383, -122.06600055);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,8 +30,18 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
       body: GoogleMap(
         initialCameraPosition: CameraPosition(
           target: sourceLocation,
-          zoom: 14.5,
+          zoom: 13.5,
         ),
+        markers: {
+          Marker(
+            markerId: MarkerId("source"),
+            position: sourceLocation,
+          ),
+          Marker(
+            markerId: MarkerId("destination"),
+            position: destination,
+          ),
+        },
       ),
     );
   }
