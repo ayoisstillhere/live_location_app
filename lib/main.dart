@@ -12,7 +12,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(),
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          elevation: 0,
+          color: Colors.white,
+        ),
+      ),
       home: const OrderTrackingPage(),
     );
   }
