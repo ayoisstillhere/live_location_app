@@ -17,6 +17,19 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
   static const LatLng destination = LatLng(33.33429383, -122.06600055);
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Track Order",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 16,
+          ),
+        ),
+      ),
+      body: const Center(
+        child: Text("The Flutter Way!"),
+      ),
+    );
   }
 }
