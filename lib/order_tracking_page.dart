@@ -23,6 +23,10 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
   List<LatLng> polylineCoordinates = [];
   LocationData? currentLocation;
 
+  BitmapDescriptor currentLocationIcon = BitmapDescriptor.defaultMarker;
+  BitmapDescriptor sourceIcon = BitmapDescriptor.defaultMarker;
+  BitmapDescriptor destinationIcon = BitmapDescriptor.defaultMarker;
+
   void getCurrentLocation() async {
     Location location = Location();
 
@@ -53,6 +57,30 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
     });
   }
 
+  void setCustomMarkerIcon() {
+    BitmapDescriptor.fromAssetImage(
+            ImageConfiguration.empty, "assets/Badge.png")
+        .then(
+      (icon) {
+        currentLocationIcon = icon;
+      },
+    );
+    BitmapDescriptor.fromAssetImage(
+            ImageConfiguration.empty, "assets/Pin_source.png")
+        .then(
+      (icon) {
+        sourceIcon = icon;
+      },
+    );
+    BitmapDescriptor.fromAssetImage(
+            ImageConfiguration.empty, "assets/Pin_destination.png")
+        .then(
+      (icon) {
+        destinationIcon = icon;
+      },
+    );
+  }
+
   void getPolyPoints() async {
     PolylinePoints polylinePoints = PolylinePoints();
 
@@ -74,6 +102,7 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
 
   @override
   void initState() {
+    setCustomMarkerIcon();
     getCurrentLocation();
     getPolyPoints();
     super.initState();
@@ -103,7 +132,7 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
               ),
               polylines: {
                 Polyline(
-                  polylineId: PolylineId("route"),
+                  polylineId: const PolylineId("route"),
                   points: polylineCoordinates,
                   color: kPrimaryColor,
                   width: 6,
@@ -112,17 +141,20 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
               markers: {
                 Marker(
                   markerId: const MarkerId("currentLocation"),
+                  icon: currentLocationIcon,
                   position: LatLng(
                     currentLocation!.latitude!,
                     currentLocation!.longitude!,
                   ),
                 ),
-                const Marker(
-                  markerId: MarkerId("source"),
+                Marker(
+                  markerId: const MarkerId("source"),
+                  icon: sourceIcon,
                   position: sourceLocation,
                 ),
-                const Marker(
-                  markerId: MarkerId("destination"),
+                Marker(
+                  markerId: const MarkerId("destination"),
+                  icon: destinationIcon,
                   position: destination,
                 ),
               },
