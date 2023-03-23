@@ -31,6 +31,11 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
         currentLocation = location;
       },
     );
+
+    location.onLocationChanged.listen((newLoc) {
+      currentLocation = newLoc;
+      setState(() {});
+    });
   }
 
   void getPolyPoints() async {
@@ -91,7 +96,7 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
               },
               markers: {
                 Marker(
-                  markerId: MarkerId("currentLocation"),
+                  markerId: const MarkerId("currentLocation"),
                   position: LatLng(
                     currentLocation!.latitude!,
                     currentLocation!.longitude!,
