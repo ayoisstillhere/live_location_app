@@ -23,7 +23,7 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
   List<LatLng> polylineCoordinates = [];
   LocationData? currentLocation;
 
-  void getCurrentLocation() {
+  void getCurrentLocation() async {
     Location location = Location();
 
     location.getLocation().then(
@@ -32,8 +32,23 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
       },
     );
 
+    GoogleMapController googleMapController = await _controller.future;
+
     location.onLocationChanged.listen((newLoc) {
       currentLocation = newLoc;
+
+      googleMapController.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(
+            zoom: 13.5,
+            target: LatLng(
+              newLoc.latitude!,
+              newLoc.longitude!,
+            ),
+          ),
+        ),
+      );
+
       setState(() {});
     });
   }
@@ -110,6 +125,9 @@ class _OrderTrackingPageState extends State<OrderTrackingPage> {
                   markerId: MarkerId("destination"),
                   position: destination,
                 ),
+              },
+              onMapCreated: (mapController) {
+                _controller.complete(mapController);
               },
             ),
     );
